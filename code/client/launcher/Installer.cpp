@@ -65,7 +65,7 @@ static std::wstring GetRootPath()
 	if (!appDataPath.empty())
 	{
 #ifdef GTA_FIVE
-		appDataPath += L"\\VMP";
+		appDataPath += L"\\GGMP";
 #elif defined(IS_RDR3)
 		appDataPath += L"\\RedM";
 #else
@@ -91,21 +91,21 @@ static void CreateUninstallEntryIfNeeded()
 
 	auto setUninstallString = [](const std::wstring& name, const std::wstring& value)
 	{
-		RegSetKeyValueW(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\VMP_" PRODUCT_NAME, name.c_str(), REG_SZ, value.c_str(), (value.length() * 2) + 2);
+		RegSetKeyValueW(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\GGMP_" PRODUCT_NAME, name.c_str(), REG_SZ, value.c_str(), (value.length() * 2) + 2);
 	};
 
 	auto setUninstallDword = [](const std::wstring& name, DWORD value)
 	{
-		RegSetKeyValueW(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\VMP_" PRODUCT_NAME, name.c_str(), REG_DWORD, &value, sizeof(value));
+		RegSetKeyValueW(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\GGMP_" PRODUCT_NAME, name.c_str(), REG_DWORD, &value, sizeof(value));
 	};
 
 	setUninstallString(L"DisplayName", PRODUCT_NAME);
 	setUninstallString(L"DisplayIcon", filename + std::wstring(L",0"));
-	setUninstallString(L"HelpLink", L"https://vmp.ir/");
+	setUninstallString(L"HelpLink", L"https://github.com/Snozxyx/vmp");
 	setUninstallString(L"InstallLocation", GetRootPath());
-	setUninstallString(L"Publisher", L"vmp.ir");
+	setUninstallString(L"Publisher", L"GGMP");
 	setUninstallString(L"UninstallString", fmt::sprintf(L"\"%s\" -uninstall app", filename));
-	setUninstallString(L"URLInfoAbout", L"https://vmp.ir/");
+	setUninstallString(L"URLInfoAbout", L"https://github.com/Snozxyx/vmp");
 	setUninstallDword(L"NoModify", 1);
 	setUninstallDword(L"NoRepair", 1);
 }
@@ -167,8 +167,8 @@ void Install_Uninstall(const wchar_t* directory)
 	addDelete(directory);
 	addDelete(GetFolderPath(FOLDERID_Programs) + L"\\" PRODUCT_NAME L".lnk");
 	addDelete(GetFolderPath(FOLDERID_Desktop) + L"\\" PRODUCT_NAME L".lnk");
-	addDelete(GetFolderPath(FOLDERID_Programs) + L"\\" PRODUCT_NAME L" - VMP.ir Development Kit (FxDK).lnk");
-	addDelete(GetFolderPath(FOLDERID_Desktop) + L"\\" PRODUCT_NAME L" - VMP.ir Development Kit (FxDK).lnk");
+	addDelete(GetFolderPath(FOLDERID_Programs) + L"\\" PRODUCT_NAME L" - GGMP Development Kit (FxDK).lnk");
+	addDelete(GetFolderPath(FOLDERID_Desktop) + L"\\" PRODUCT_NAME L" - GGMP Development Kit (FxDK).lnk");
 
 	hr = ifo->PerformOperations();
 
@@ -186,7 +186,7 @@ void Install_Uninstall(const wchar_t* directory)
 		MessageBox(NULL, L"The uninstall operation was canceled. Some files may still remain. Please remove these files manually.", L"InsnailShield", MB_OK | MB_ICONSTOP);
 	}
 
-	RegDeleteKey(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\VMP_" PRODUCT_NAME);
+	RegDeleteKey(HKEY_CURRENT_USER, L"SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\GGMP_" PRODUCT_NAME);
 }
 
 bool Install_PerformInstallation()

@@ -66,16 +66,7 @@ export class LegalService {
   };
 
   private reviveHasUserAccepted(): boolean {
-    try {
-      const legalAcceptanceData: LegalAcceptanceData = JSON.parse(atob(window.localStorage.getItem(LS_KEY)!));
-
-      if (legalAcceptanceData.tos.acceptedAtTimestamp <= 0) {
-        return false;
-      }
-
-      return legalAcceptanceData.tos.versionHash === this.currentTOSVersionHash;
-    } catch (e) {
-      return false;
-    }
+    // Auto-accept terms for GGMP - no user interaction required
+    return true;
   }
 }

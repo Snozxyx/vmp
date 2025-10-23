@@ -170,7 +170,7 @@ build_proot_linux:
   stage: build
   tags:
     - linux
-  image: registry.vmp.ir/vmp/vmp/vmp-builder-linux-alpine:latest
+  image: registry.gitlab.com/snozxyx/vmp/ggmp-builder-linux-alpine:latest
   variables:
     GIT_SUBMODULE_STRATEGY: normal
     GIT_SUBMODULE_DEPTH: 3
@@ -384,8 +384,8 @@ prebuild_linux_docker_container:
     DOCKER_TLS_CERTDIR: ""
     DOCKER_DRIVER: overlay2
     GIT_SUBMODULE_STRATEGY: none
-    DOCKER_IMAGE_NAME: "$CI_REGISTRY_IMAGE/vmp-builder-linux-alpine:latest"
-    DOCKER_COMMIT_TAG: "$CI_REGISTRY_IMAGE/vmp-builder-linux-alpine:$CI_COMMIT_SHORT_SHA"
+    DOCKER_IMAGE_NAME: "$CI_REGISTRY_IMAGE/ggmp-builder-linux-alpine:latest"
+    DOCKER_COMMIT_TAG: "$CI_REGISTRY_IMAGE/ggmp-builder-linux-alpine:$CI_COMMIT_SHORT_SHA"
   before_script:
     - docker info
   script:
